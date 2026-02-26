@@ -1,26 +1,73 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg-primary: #1a1a2e;
+  --bg-secondary: #0f3460;
+  --accent: #e94560;
+  --text-primary: #eaeaea;
+  --text-muted: #b5bbcb;
+  --border-soft: rgba(234, 234, 234, 0.18);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+  background:
+    radial-gradient(
+      circle at 12% 14%,
+      rgba(233, 69, 96, 0.18) 0%,
+      transparent 36%
+    ),
+    radial-gradient(
+      circle at 84% 24%,
+      rgba(15, 52, 96, 0.6) 0%,
+      transparent 40%
+    ),
+    var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body), sans-serif;
+  overflow-x: clip;
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background: rgba(233, 69, 96, 0.45);
+  color: #ffffff;
+}
+
+.font-heading {
+  font-family: var(--font-heading), sans-serif;
+}
+
+.type-cursor {
+  display: inline-block;
+  margin-left: 2px;
+  animation: cursor-blink 1s steps(1) infinite;
+}
+
+.card-surface {
+  border: 1px solid var(--border-soft);
+  background: linear-gradient(
+    160deg,
+    rgba(15, 52, 96, 0.4) 0%,
+    rgba(15, 52, 96, 0.22) 100%
+  );
+  backdrop-filter: blur(6px);
+}
+
+@keyframes cursor-blink {
+  0%,
+  48% {
+    opacity: 1;
+  }
+  49%,
+  100% {
+    opacity: 0;
+  }
 }
