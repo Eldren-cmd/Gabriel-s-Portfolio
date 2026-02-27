@@ -15,7 +15,7 @@ export default function OtherProjectsSection() {
 
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {otherProjects.map((project, index) => {
-            const screenshotTarget = project.live ?? project.github;
+            const hasLive = Boolean(project.live);
 
             return (
               <motion.article
@@ -27,13 +27,21 @@ export default function OtherProjectsSection() {
                 transition={{ duration: 0.45, delay: index * 0.04 }}
                 whileHover={{ y: -6 }}
               >
-                <Image
-                  src={screenshotFrom(screenshotTarget)}
-                  alt={`${project.title} screenshot`}
-                  className="h-44 w-full border-b border-line object-cover"
-                  width={1280}
-                  height={720}
-                />
+                {hasLive ? (
+                  <Image
+                    src={screenshotFrom(project.live as string)}
+                    alt={`${project.title} screenshot`}
+                    className="h-44 w-full border-b border-line object-cover"
+                    width={1280}
+                    height={720}
+                  />
+                ) : (
+                  <div className="flex h-44 w-full items-center justify-center border-b border-line bg-[radial-gradient(circle_at_20%_20%,rgba(123,47,190,0.35),transparent_60%),radial-gradient(circle_at_80%_80%,rgba(201,168,76,0.28),transparent_62%),linear-gradient(145deg,rgba(26,16,64,0.85),rgba(123,47,190,0.35))] px-4 text-center">
+                    <p className="font-heading text-2xl font-bold leading-tight text-primary sm:text-3xl">
+                      {project.title}
+                    </p>
+                  </div>
+                )}
 
                 <div className="space-y-4 p-5">
                   <h4 className="font-heading text-xl font-semibold text-text">

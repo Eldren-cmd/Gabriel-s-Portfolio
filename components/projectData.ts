@@ -84,6 +84,10 @@ export const otherProjects: Project[] = [
   },
 ];
 
+const screenshotAccessKey = "uCMhye1klH6CKQ";
+
 export function screenshotFrom(url: string) {
-  return `/api/screenshot?url=${encodeURIComponent(url)}`;
+  return `https://api.screenshotone.com/take?access_key=${screenshotAccessKey}&url=${encodeURIComponent(
+    url
+  )}&viewport_width=1280&viewport_height=720&format=jpg&block_ads=true&block_cookie_banners=true`;
 }
