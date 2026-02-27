@@ -1,72 +1,106 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --bg-primary: #1a1a2e;
-  --bg-secondary: #0f3460;
-  --accent: #e94560;
-  --text-primary: #eaeaea;
-  --text-muted: #b5bbcb;
-  --border-soft: rgba(234, 234, 234, 0.18);
+@layer base {
+  :root {
+    --bg: #faf7ff;
+    --surface: #ede6ff;
+    --primary: #b8860b;
+    --secondary: #6a0dad;
+    --text: #1a0a2e;
+    --muted: #5a4a7a;
+    --line: rgba(90, 74, 122, 0.24);
+    --glass: rgba(237, 230, 255, 0.7);
+    --hero-gold: rgba(184, 134, 11, 0.18);
+    --hero-purple: rgba(106, 13, 173, 0.2);
+  }
+
+  .dark {
+    --bg: #0d0d1a;
+    --surface: #1a1040;
+    --primary: #c9a84c;
+    --secondary: #7b2fbe;
+    --text: #f5f0ff;
+    --muted: #a89cc8;
+    --line: rgba(245, 240, 255, 0.18);
+    --glass: rgba(13, 13, 26, 0.76);
+    --hero-gold: rgba(201, 168, 76, 0.22);
+    --hero-purple: rgba(123, 47, 190, 0.26);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    min-height: 100vh;
+    overflow-x: clip;
+    background-color: var(--bg);
+    background-image:
+      radial-gradient(circle at 10% 12%, var(--hero-purple) 0%, transparent 36%),
+      radial-gradient(circle at 87% 18%, var(--hero-gold) 0%, transparent 38%),
+      radial-gradient(circle at 65% 85%, rgba(123, 47, 190, 0.08) 0%, transparent 32%);
+    color: var(--text);
+    font-family: var(--font-body), sans-serif;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  ::selection {
+    background: rgba(201, 168, 76, 0.34);
+    color: var(--text);
+  }
 }
 
-html {
-  scroll-behavior: smooth;
-}
+@layer components {
+  .font-heading {
+    font-family: var(--font-heading), sans-serif;
+  }
 
-body {
-  min-height: 100vh;
-  background:
-    radial-gradient(
-      circle at 12% 14%,
-      rgba(233, 69, 96, 0.18) 0%,
-      transparent 36%
-    ),
-    radial-gradient(
-      circle at 84% 24%,
-      rgba(15, 52, 96, 0.6) 0%,
-      transparent 40%
-    ),
-    var(--bg-primary);
-  color: var(--text-primary);
-  font-family: var(--font-body), sans-serif;
-  overflow-x: clip;
-}
+  .section-shell {
+    @apply px-5 py-24 sm:px-10 lg:px-16;
+  }
 
-a {
-  color: inherit;
-}
+  .surface-card {
+    border: 1px solid var(--line);
+    background: linear-gradient(
+      165deg,
+      color-mix(in srgb, var(--surface) 92%, transparent) 0%,
+      color-mix(in srgb, var(--surface) 78%, transparent) 100%
+    );
+    backdrop-filter: blur(8px);
+  }
 
-::selection {
-  background: rgba(233, 69, 96, 0.45);
-  color: #ffffff;
-}
+  .gold-glow-hover {
+    transition:
+      transform 220ms ease,
+      box-shadow 220ms ease,
+      border-color 220ms ease;
+  }
 
-.font-heading {
-  font-family: var(--font-heading), sans-serif;
-}
+  .gold-glow-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 28px rgba(201, 168, 76, 0.22);
+    border-color: color-mix(in srgb, var(--primary) 70%, var(--line));
+  }
 
-.type-cursor {
-  display: inline-block;
-  margin-left: 2px;
-  animation: cursor-blink 1s steps(1) infinite;
-}
-
-.card-surface {
-  border: 1px solid var(--border-soft);
-  background: linear-gradient(
-    160deg,
-    rgba(15, 52, 96, 0.4) 0%,
-    rgba(15, 52, 96, 0.22) 100%
-  );
-  backdrop-filter: blur(6px);
+  .typing-cursor {
+    margin-left: 3px;
+    display: inline-block;
+    animation: cursor-blink 1s steps(1) infinite;
+  }
 }
 
 @keyframes cursor-blink {
   0%,
-  48% {
+  50% {
     opacity: 1;
   }
-  49%,
+
+  51%,
   100% {
     opacity: 0;
   }

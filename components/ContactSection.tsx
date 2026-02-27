@@ -4,7 +4,7 @@ import emailjs from "@emailjs/browser";
 import { type FormEvent, useState } from "react";
 import SectionReveal from "@/components/SectionReveal";
 
-type ContactState = {
+type ContactFormState = {
   name: string;
   email: string;
   message: string;
@@ -12,14 +12,14 @@ type ContactState = {
 
 type SubmitState = "idle" | "sending" | "success" | "error" | "missing_config";
 
-const initialState: ContactState = {
+const initialState: ContactFormState = {
   name: "",
   email: "",
   message: "",
 };
 
 export default function ContactSection() {
-  const [formState, setFormState] = useState<ContactState>(initialState);
+  const [form, setForm] = useState<ContactFormState>(initialState);
   const [submitState, setSubmitState] = useState<SubmitState>("idle");
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -40,118 +40,109 @@ export default function ContactSection() {
         serviceId,
         templateId,
         {
-          from_name: formState.name,
-          reply_to: formState.email,
-          message: formState.message,
+          from_name: form.name,
+          reply_to: form.email,
+          message: form.message,
           to_name: "Gabriel Adegboyega",
         },
         { publicKey }
       );
-
       setSubmitState("success");
-      setFormState(initialState);
+      setForm(initialState);
     } catch {
       setSubmitState("error");
     }
   };
 
   return (
-    <SectionReveal id="contact" className="px-6 py-24 sm:px-10 lg:px-16">
-      <div className="mx-auto grid w-full max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr]">
-        <div className="space-y-6">
-          <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[var(--accent)]">
+    <SectionReveal id="contact" className="section-shell">
+      <div className="mx-auto grid w-full max-w-7xl gap-8 lg:grid-cols-[0.95fr_1.05fr]">
+        <div className="space-y-5">
+          <p className="text-sm font-semibold uppercase tracking-[0.14em] text-primary">
             Contact
           </p>
-          <h2 className="font-heading text-4xl font-bold leading-tight sm:text-5xl">
+          <h2 className="font-heading text-4xl font-bold leading-tight text-text sm:text-5xl">
             Let&apos;s Build Something Together
           </h2>
-          <p className="max-w-md leading-relaxed text-[var(--text-muted)]">
-            Looking for a developer for freelance work or a full-time role? Send
-            a message and I&apos;ll get back to you quickly.
+          <p className="max-w-md leading-relaxed text-muted">
+            Open to full-time roles and freelance projects.
           </p>
-
-          <div className="space-y-3 pt-2">
+          <a
+            href="https://github.com/Eldren-cmd"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center rounded-full border border-line px-4 py-2 text-sm font-medium text-text transition hover:border-primary hover:text-primary"
+          >
+            GitHub: @Eldren-cmd
+          </a>
+          <div className="flex items-center gap-3 pt-2">
             <a
-              className="block text-lg font-semibold text-[var(--text-primary)] underline decoration-[var(--accent)] decoration-2 underline-offset-4"
-              href="mailto:adenrelegabriel@gmail.com"
+              href="https://github.com/Eldren-cmd"
+              target="_blank"
+              rel="noreferrer"
+              className="gold-glow-hover rounded-full border border-secondary px-4 py-2 text-xs font-semibold uppercase tracking-[0.1em] text-secondary hover:border-primary hover:text-primary"
             >
-              adenrelegabriel@gmail.com
+              GitHub
             </a>
-            <div className="flex flex-wrap gap-3">
-              <a
-                className="rounded-full border border-white/25 px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
-                href="https://github.com/Eldren-cmd"
-                target="_blank"
-                rel="noreferrer"
-              >
-                GitHub
-              </a>
-              <a
-                className="rounded-full border border-white/25 px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
-                href="https://www.linkedin.com/in/your-linkedin"
-                target="_blank"
-                rel="noreferrer"
-              >
-                LinkedIn
-              </a>
-            </div>
+            <a
+              href="https://www.linkedin.com/in/your-linkedin-url"
+              target="_blank"
+              rel="noreferrer"
+              className="gold-glow-hover rounded-full border border-secondary px-4 py-2 text-xs font-semibold uppercase tracking-[0.1em] text-secondary hover:border-primary hover:text-primary"
+            >
+              LinkedIn
+            </a>
           </div>
         </div>
 
         <form
           onSubmit={handleSubmit}
-          className="card-surface rounded-3xl p-7 sm:p-8"
+          className="surface-card rounded-3xl p-6 sm:p-8"
           noValidate
         >
-          <div className="grid gap-5">
-            <label className="grid gap-2 text-sm font-medium">
+          <div className="grid gap-4">
+            <label className="grid gap-1.5 text-sm font-medium text-text">
               Name
               <input
                 type="text"
                 required
-                value={formState.name}
+                value={form.name}
                 onChange={(event) =>
-                  setFormState((current) => ({
-                    ...current,
-                    name: event.target.value,
-                  }))
+                  setForm((current) => ({ ...current, name: event.target.value }))
                 }
-                className="rounded-xl border border-white/20 bg-[#1A1A2E] px-4 py-3 text-sm outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/25"
                 placeholder="Your name"
+                className="rounded-xl border border-line bg-surface px-4 py-3 text-sm text-text outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/25"
               />
             </label>
 
-            <label className="grid gap-2 text-sm font-medium">
+            <label className="grid gap-1.5 text-sm font-medium text-text">
               Email
               <input
                 type="email"
                 required
-                value={formState.email}
+                value={form.email}
                 onChange={(event) =>
-                  setFormState((current) => ({
-                    ...current,
-                    email: event.target.value,
-                  }))
+                  setForm((current) => ({ ...current, email: event.target.value }))
                 }
-                className="rounded-xl border border-white/20 bg-[#1A1A2E] px-4 py-3 text-sm outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/25"
                 placeholder="you@example.com"
+                className="rounded-xl border border-line bg-surface px-4 py-3 text-sm text-text outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/25"
               />
             </label>
 
-            <label className="grid gap-2 text-sm font-medium">
+            <label className="grid gap-1.5 text-sm font-medium text-text">
               Message
               <textarea
                 required
                 rows={5}
-                value={formState.message}
+                value={form.message}
                 onChange={(event) =>
-                  setFormState((current) => ({
+                  setForm((current) => ({
                     ...current,
                     message: event.target.value,
                   }))
                 }
-                className="rounded-xl border border-white/20 bg-[#1A1A2E] px-4 py-3 text-sm outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/25"
-                placeholder="Tell me about your project..."
+                placeholder="Tell me about your project"
+                className="rounded-xl border border-line bg-surface px-4 py-3 text-sm text-text outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/25"
               />
             </label>
           </div>
@@ -159,25 +150,24 @@ export default function ContactSection() {
           <button
             type="submit"
             disabled={submitState === "sending"}
-            className="mt-6 rounded-full bg-[var(--accent)] px-7 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-white transition hover:-translate-y-0.5 hover:shadow-[0_12px_24px_rgba(233,69,96,0.35)] disabled:cursor-not-allowed disabled:opacity-75"
+            className="gold-glow-hover mt-6 rounded-full border border-primary bg-primary px-7 py-3 text-sm font-semibold uppercase tracking-[0.1em] text-[#1A0A2E] transition hover:bg-secondary hover:text-[#FAF7FF] disabled:cursor-not-allowed disabled:opacity-70 dark:text-[#1A1040]"
           >
             {submitState === "sending" ? "Sending..." : "Submit"}
           </button>
 
           {submitState === "success" && (
-            <p className="mt-4 text-sm text-emerald-300">
+            <p className="mt-4 text-sm text-emerald-500 dark:text-emerald-300">
               Message sent successfully.
             </p>
           )}
           {submitState === "error" && (
-            <p className="mt-4 text-sm text-rose-300">
+            <p className="mt-4 text-sm text-red-600 dark:text-red-300">
               Message failed to send. Please try again.
             </p>
           )}
           {submitState === "missing_config" && (
-            <p className="mt-4 text-sm text-amber-200">
-              EmailJS keys are missing. Add them to `.env.local` using
-              `.env.example`.
+            <p className="mt-4 text-sm text-amber-700 dark:text-amber-300">
+              EmailJS keys are missing. Add them to `.env.local`.
             </p>
           )}
         </form>

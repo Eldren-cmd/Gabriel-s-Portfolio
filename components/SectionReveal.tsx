@@ -19,7 +19,7 @@ export default function SectionReveal({
   const ref = useRef<HTMLElement | null>(null);
   const isInView = useInView(ref, {
     once: true,
-    margin: "-80px 0px -80px 0px",
+    margin: "-90px 0px -80px 0px",
   });
 
   return (
@@ -27,8 +27,8 @@ export default function SectionReveal({
       id={id}
       ref={ref}
       className={className}
-      initial={{ opacity: 0, y: 42 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      initial={{ opacity: 0, y: 34 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 34 }}
       transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay }}
     >
       {children}
