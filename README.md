@@ -1,4 +1,4 @@
-# Gabriel Adegboyega Portfolio
+# Gabriel Adenrele Portfolio
 
 Personal single-page portfolio built with:
 

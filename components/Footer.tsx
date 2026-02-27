@@ -27,7 +27,7 @@ export default function Footer() {
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
         <div className="space-y-2">
           <p className="text-sm text-muted">
-            &copy; 2025 Gabriel Adegboyega. All rights reserved.
+            &copy; 2025 Gabriel Adenrele. All rights reserved.
           </p>
           <p className="text-xs uppercase tracking-[0.1em] text-muted">
             Built with Next.js &amp; Tailwind CSS

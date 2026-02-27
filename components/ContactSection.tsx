@@ -1,52 +1,49 @@
 "use client";
 
 import emailjs from "@emailjs/browser";
-import { type FormEvent, useState } from "react";
+import { type FormEvent, useRef, useState } from "react";
 import SectionReveal from "@/components/SectionReveal";
 
 type ContactFormState = {
-  name: string;
-  email: string;
+  from_name: string;
+  from_email: string;
   message: string;
 };
 
-type SubmitState = "idle" | "sending" | "success" | "error" | "missing_config";
+type SubmitState = "idle" | "sending" | "success" | "error";
 
 const initialState: ContactFormState = {
-  name: "",
-  email: "",
+  from_name: "",
+  from_email: "",
   message: "",
 };
 
+const EMAILJS_SERVICE_ID = "service_k3n5f78";
+const EMAILJS_TEMPLATE_ID = "template_5kktl2l";
+const EMAILJS_PUBLIC_KEY = "c6l-w_zIIX03NZUXE";
+
 export default function ContactSection() {
+  const formRef = useRef<HTMLFormElement | null>(null);
   const [form, setForm] = useState<ContactFormState>(initialState);
   const [submitState, setSubmitState] = useState<SubmitState>("idle");
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setSubmitState("sending");
 
-    const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
-    const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
-    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
-
-    if (!serviceId || !templateId || !publicKey) {
-      setSubmitState("missing_config");
+    if (!formRef.current) {
       return;
     }
 
+    setSubmitState("sending");
+
     try {
-      await emailjs.send(
-        serviceId,
-        templateId,
-        {
-          from_name: form.name,
-          reply_to: form.email,
-          message: form.message,
-          to_name: "Gabriel Adenrele",
-        },
-        { publicKey }
+      await emailjs.sendForm(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        formRef.current,
+        EMAILJS_PUBLIC_KEY
       );
+
       setSubmitState("success");
       setForm(initialState);
     } catch {
@@ -96,19 +93,26 @@ export default function ContactSection() {
         </div>
 
         <form
+          ref={formRef}
           onSubmit={handleSubmit}
           className="surface-card rounded-3xl p-6 sm:p-8"
           noValidate
         >
+          <input type="hidden" name="reply_to" value={form.from_email} />
+
           <div className="grid gap-4">
             <label className="grid gap-1.5 text-sm font-medium text-text">
               Name
               <input
                 type="text"
+                name="from_name"
                 required
-                value={form.name}
+                value={form.from_name}
                 onChange={(event) =>
-                  setForm((current) => ({ ...current, name: event.target.value }))
+                  setForm((current) => ({
+                    ...current,
+                    from_name: event.target.value,
+                  }))
                 }
                 placeholder="Your name"
                 className="rounded-xl border border-line bg-surface px-4 py-3 text-sm text-text outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/25"
@@ -119,10 +123,14 @@ export default function ContactSection() {
               Email
               <input
                 type="email"
+                name="from_email"
                 required
-                value={form.email}
+                value={form.from_email}
                 onChange={(event) =>
-                  setForm((current) => ({ ...current, email: event.target.value }))
+                  setForm((current) => ({
+                    ...current,
+                    from_email: event.target.value,
+                  }))
                 }
                 placeholder="you@example.com"
                 className="rounded-xl border border-line bg-surface px-4 py-3 text-sm text-text outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/25"
@@ -134,6 +142,7 @@ export default function ContactSection() {
               <textarea
                 required
                 rows={5}
+                name="message"
                 value={form.message}
                 onChange={(event) =>
                   setForm((current) => ({
@@ -152,22 +161,24 @@ export default function ContactSection() {
             disabled={submitState === "sending"}
             className="gold-glow-hover mt-6 rounded-full border border-primary bg-primary px-7 py-3 text-sm font-semibold uppercase tracking-[0.1em] text-[#1A0A2E] transition hover:bg-secondary hover:text-[#FAF7FF] disabled:cursor-not-allowed disabled:opacity-70 dark:text-[#1A1040]"
           >
-            {submitState === "sending" ? "Sending..." : "Submit"}
+            {submitState === "sending" ? (
+              <span className="inline-flex items-center gap-2">
+                <span className="h-4 w-4 animate-spin rounded-full border-2 border-[#1A0A2E] border-t-transparent dark:border-[#1A1040] dark:border-t-transparent" />
+                Sending...
+              </span>
+            ) : (
+              "Submit"
+            )}
           </button>
 
           {submitState === "success" && (
-            <p className="mt-4 text-sm text-emerald-500 dark:text-emerald-300">
-              Message sent successfully.
+            <p className="mt-4 text-sm font-medium text-primary">
+              Message sent! Gabriel will get back to you soon.
             </p>
           )}
           {submitState === "error" && (
             <p className="mt-4 text-sm text-red-600 dark:text-red-300">
-              Message failed to send. Please try again.
-            </p>
-          )}
-          {submitState === "missing_config" && (
-            <p className="mt-4 text-sm text-amber-700 dark:text-amber-300">
-              EmailJS keys are missing. Add them to `.env.local`.
+              Something went wrong. Please try again.
             </p>
           )}
         </form>
