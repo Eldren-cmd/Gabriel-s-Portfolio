@@ -27,7 +27,7 @@ export default function Footer() {
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
         <div className="space-y-2">
           <p className="text-sm text-muted">
-            © 2025 Gabriel Adegboyega. All rights reserved.
+            &copy; 2025 Gabriel Adegboyega. All rights reserved.
           </p>
           <p className="text-xs uppercase tracking-[0.1em] text-muted">
             Built with Next.js &amp; Tailwind CSS
@@ -57,7 +57,7 @@ export default function Footer() {
             <GitHubIcon />
           </a>
           <a
-            href="https://www.linkedin.com/in/your-linkedin-url"
+            href="https://www.linkedin.com/in/adenrele-gabriel-9332b9183/"
             target="_blank"
             rel="noreferrer"
             className="gold-glow-hover rounded-full border border-secondary p-2 text-secondary hover:border-primary hover:text-primary"

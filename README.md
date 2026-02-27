@@ -25,6 +25,7 @@ Open `http://localhost:3000`.
 NEXT_PUBLIC_EMAILJS_SERVICE_ID=your_service_id
 NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=your_template_id
 NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=your_public_key
+SCREENSHOTONE_ACCESS_KEY=your_screenshotone_access_key
 ```
 
 3. Restart the dev server.
@@ -38,4 +39,4 @@ npm run build
 
 ## Deployment
 
-Deploy to Vercel and add the same EmailJS environment variables in project settings.
+Deploy to Vercel and add the same EmailJS + ScreenshotOne environment variables in project settings.

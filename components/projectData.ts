@@ -85,7 +85,5 @@ export const otherProjects: Project[] = [
 ];
 
 export function screenshotFrom(url: string) {
-  return `https://api.screenshotone.com/take?url=${encodeURIComponent(
-    url
-  )}&viewport_width=1280&viewport_height=720&format=jpg`;
+  return `/api/screenshot?url=${encodeURIComponent(url)}`;
 }

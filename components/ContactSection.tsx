@@ -43,7 +43,7 @@ export default function ContactSection() {
           from_name: form.name,
           reply_to: form.email,
           message: form.message,
-          to_name: "Gabriel Adegboyega",
+          to_name: "Gabriel Adenrele",
         },
         { publicKey }
       );
@@ -85,7 +85,7 @@ export default function ContactSection() {
               GitHub
             </a>
             <a
-              href="https://www.linkedin.com/in/your-linkedin-url"
+              href="https://www.linkedin.com/in/adenrele-gabriel-9332b9183/"
               target="_blank"
               rel="noreferrer"
               className="gold-glow-hover rounded-full border border-secondary px-4 py-2 text-xs font-semibold uppercase tracking-[0.1em] text-secondary hover:border-primary hover:text-primary"

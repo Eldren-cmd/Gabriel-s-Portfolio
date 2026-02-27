@@ -12,7 +12,7 @@ export default function AboutSection() {
             I build real products, not demo code.
           </h2>
           <p className="max-w-xl text-base leading-relaxed text-muted">
-            I am Gabriel Adenrele Adegboyega, a Full Stack Developer trained at
+            I am Gabriel Adenrele, a Full Stack Developer trained at
             ITSkillsCenter and based in Nigeria. I enjoy turning ideas into
             practical products that solve real user and business problems.
           </p>
