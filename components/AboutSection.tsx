@@ -35,7 +35,7 @@ export default function AboutSection() {
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <a
               href="/cv.pdf"
-              download="Gabriel_Adegboyega_CV.pdf"
+              download="Gabriel_Adenrele_CV.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="gold-glow-hover rounded-full border border-primary bg-primary px-6 py-3 text-sm font-semibold uppercase tracking-[0.1em] text-[#1A0A2E] dark:text-[#1A1040]"
