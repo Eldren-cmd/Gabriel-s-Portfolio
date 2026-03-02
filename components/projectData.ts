@@ -8,16 +8,40 @@ export type Project = {
 export type FeaturedProject = Project & {
   description: string;
   live: string;
+  badge?: string;
+  highlightLabel?: string;
+  keyFeatures?: string[];
 };
 
 export const featuredProjects: FeaturedProject[] = [
   {
     title: "Naija Transport",
     description:
-      "A Nigerian bus/transport web application - my most technically ambitious project. Built with TypeScript to handle complex application state and real-world transport data.",
-    live: "https://naijatransport.vercel.app/",
+      "A full-stack, real-time Nigerian transport platform. Users can search bus routes across Lagos, get live fare estimates, report traffic incidents, and record GPS trips - all with real-time updates powered by Socket.IO.",
+    live: "https://naijatransport.vercel.app",
     github: "https://github.com/Eldren-cmd/naija-bus",
-    tech: ["TypeScript", "JavaScript", "HTML", "CSS"],
+    tech: [
+      "TypeScript",
+      "React",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "Socket.IO",
+      "JWT Auth",
+      "Mapbox",
+      "CI/CD",
+    ],
+    keyFeatures: [
+      "User authentication with JWT refresh tokens",
+      "Geospatial route & stop search (MongoDB 2dsphere)",
+      "Real-time incident map updates via Socket.IO",
+      "Crowdsourced fare reporting engine",
+      "GPS trip recording & replay",
+      "Admin dashboard for route management",
+      "Automated CI/CD with GitHub Actions",
+    ],
+    badge: "Full Stack · Real-Time · Production",
+    highlightLabel: "Featured Project",
   },
   {
     title: "Freelance Calculator",

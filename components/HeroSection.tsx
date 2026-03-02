@@ -3,7 +3,12 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useState } from "react";
 
-const roles = ["Full Stack Developer", "UI Builder", "Problem Solver"];
+const roles = [
+  "Full Stack Developer",
+  "React & Node.js Engineer",
+  "I Build Real Products",
+  "Open to Work",
+];
 
 export default function HeroSection() {
   const { scrollY } = useScroll();
