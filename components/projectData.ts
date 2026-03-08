@@ -8,9 +8,13 @@ export type Project = {
 export type FeaturedProject = Project & {
   description: string;
   live: string;
+  subtitle?: string;
   badge?: string;
   highlightLabel?: string;
   keyFeatures?: string[];
+  layout?: "hero" | "featured" | "standard";
+  accent?: "default" | "purple";
+  liveLabel?: string;
 };
 
 export const featuredProjects: FeaturedProject[] = [
@@ -40,8 +44,44 @@ export const featuredProjects: FeaturedProject[] = [
       "Admin dashboard for route management",
       "Automated CI/CD with GitHub Actions",
     ],
-    badge: "Full Stack · Real-Time · Production",
+    badge: "Full Stack \u00B7 Real-Time \u00B7 Production",
+    highlightLabel: "Flagship Project",
+    layout: "hero",
+  },
+  {
+    title: "CVPadi",
+    subtitle: "AI CV Builder SaaS",
+    description:
+      "A full-stack SaaS platform built for Nigerian professionals. Users build their CV through a conversational wizard, receive an AI score, pay via Paystack to unlock their PDF, and get an AI-enhanced CV delivered by email, powered by the Claude API.",
+    live: "https://cvpadi.com",
+    github: "https://github.com/Eldren-cmd/CVpadi",
+    tech: [
+      "TypeScript",
+      "Next.js 14",
+      "Supabase",
+      "PostgreSQL",
+      "Claude API",
+      "Paystack",
+      "Resend",
+      "Tailwind CSS",
+      "Vercel",
+      "Edge Functions",
+    ],
+    keyFeatures: [
+      "Conversational CV builder with real-time scoring",
+      "AI enhancement queue powered by Claude API (Haiku)",
+      "Paystack payment integration with HMAC webhook verification",
+      "PDF + WhatsApp JPG generation and signed URL delivery",
+      "Weighted job-matching engine with automated scraper",
+      "Anti-abuse stack: fingerprinting, rate limiting, atomic SQL",
+      "CV version timeline with forking",
+      "Public salary database and NYSC guide hub",
+    ],
+    badge: "SaaS \u00B7 AI-Powered \u00B7 Payments",
     highlightLabel: "Featured Project",
+    layout: "featured",
+    accent: "purple",
+    liveLabel: "Live App",
   },
   {
     title: "Freelance Calculator",

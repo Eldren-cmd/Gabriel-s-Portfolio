@@ -18,25 +18,40 @@ export default function FeaturedProjectsSection() {
           </h2>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-3">
+        <div className="grid gap-6 lg:grid-cols-2 xl:grid-cols-3">
           {featuredProjects.map((project, index) => {
-            const isFeaturedCard = index === 0;
+            const layout = project.layout ?? (index === 0 ? "hero" : "standard");
+            const isHeroCard = layout === "hero";
+            const isFeaturedCard =
+              layout === "hero" || layout === "featured";
+            const isPurpleAccent = project.accent === "purple";
+
+            const articleClassName = [
+              "surface-card gold-glow-hover relative overflow-hidden rounded-3xl",
+              isHeroCard
+                ? "border-2 border-primary/80 shadow-[0_0_0_1px_rgba(201,168,76,0.5),0_0_32px_rgba(201,168,76,0.22)] lg:col-span-2 xl:col-span-3 xl:scale-[1.01]"
+                : isFeaturedCard
+                  ? "border-2 border-primary/75 shadow-[0_0_0_1px_rgba(201,168,76,0.38),0_0_28px_rgba(106,13,173,0.16)] lg:col-span-2 xl:col-span-2"
+                  : "border lg:col-span-1",
+            ]
+              .filter(Boolean)
+              .join(" ");
 
             return (
               <motion.article
                 key={project.title}
-                className={`surface-card gold-glow-hover relative overflow-hidden rounded-3xl ${
-                  isFeaturedCard
-                    ? "border-2 border-primary/80 shadow-[0_0_0_1px_rgba(201,168,76,0.5),0_0_32px_rgba(201,168,76,0.22)] lg:col-span-3 lg:scale-[1.01]"
-                    : "border lg:col-span-1"
-                }`}
+                className={articleClassName}
                 initial={{ opacity: 0, y: 26 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.26 }}
                 transition={{ duration: 0.55, delay: index * 0.08 }}
                 whileHover={{ y: -8 }}
               >
-                {isFeaturedCard && project.badge && (
+                {isPurpleAccent && (
+                  <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(106,13,173,0.28),transparent_34%),radial-gradient(circle_at_bottom_left,rgba(201,168,76,0.14),transparent_42%),linear-gradient(180deg,rgba(42,18,78,0.18),rgba(42,18,78,0.04))]" />
+                )}
+
+                {project.badge && (
                   <span className="absolute right-4 top-4 z-20 rounded-full bg-primary px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.08em] text-[#1A0A2E] dark:text-[#1A1040] sm:right-5 sm:top-5">
                     {project.badge}
                   </span>
@@ -45,23 +60,43 @@ export default function FeaturedProjectsSection() {
                 <Image
                   src={screenshotFrom(project.live)}
                   alt={`${project.title} project screenshot`}
-                  className={`w-full border-b border-line object-cover ${
-                    isFeaturedCard ? "h-56 sm:h-72" : "h-52 sm:h-64"
+                  className={`relative z-10 w-full border-b border-line object-cover ${
+                    isHeroCard
+                      ? "h-56 sm:h-72"
+                      : isFeaturedCard
+                        ? "h-56 sm:h-64"
+                        : "h-52 sm:h-64"
                   }`}
                   width={1280}
                   height={720}
                 />
 
-                <div className={`space-y-5 p-6 ${isFeaturedCard ? "sm:p-7" : ""}`}>
-                  {isFeaturedCard && project.highlightLabel && (
+                <div
+                  className={`relative z-10 space-y-5 p-6 ${
+                    isFeaturedCard ? "sm:p-7" : ""
+                  }`}
+                >
+                  {project.highlightLabel && (
                     <p className="text-xs font-semibold uppercase tracking-[0.14em] text-primary">
                       {project.highlightLabel}
                     </p>
                   )}
 
-                  <h3 className="font-heading text-3xl font-semibold text-text">
-                    {project.title}
-                  </h3>
+                  <div className="space-y-2">
+                    <h3
+                      className={`font-heading font-semibold text-text ${
+                        isFeaturedCard ? "text-3xl sm:text-4xl" : "text-3xl"
+                      }`}
+                    >
+                      {project.title}
+                    </h3>
+                    {project.subtitle && (
+                      <p className="text-sm font-semibold uppercase tracking-[0.12em] text-secondary">
+                        {project.subtitle}
+                      </p>
+                    )}
+                  </div>
+
                   <p className="leading-relaxed text-muted">
                     {project.description}
                   </p>
@@ -92,7 +127,7 @@ export default function FeaturedProjectsSection() {
                       rel="noreferrer"
                       className="gold-glow-hover rounded-full border border-primary bg-primary px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.11em] text-[#1A0A2E] dark:text-[#1A1040]"
                     >
-                      Live Demo
+                      {project.liveLabel ?? "Live Demo"}
                     </a>
                     <a
                       href={project.github}
