@@ -49,6 +49,34 @@ export const featuredProjects: FeaturedProject[] = [
     layout: "hero",
   },
   {
+    title: "HRF",
+    subtitle: "House Rent & Roommate Finder",
+    description:
+      "A Nigeria-focused housing platform for verified listings and roommate matching. It combines search, filtering, real-time chat, and an AI-assisted listing flow in a polished product experience.",
+    live: "https://hrf-app.vercel.app",
+    github: "https://github.com/Eldren-cmd/hrf-app",
+    tech: [
+      "React 18",
+      "Vite",
+      "JavaScript",
+      "React Router",
+      "Claude API",
+      "LocalStorage",
+      "Responsive UI",
+    ],
+    keyFeatures: [
+      "Browse and filter Nigerian property listings",
+      "AI-powered roommate compatibility matching",
+      "WhatsApp-style landlord chat experience",
+      "Multi-step listing wizard with AI description generation",
+      "LocalStorage persistence with no backend dependency",
+      "Mobile-first UI tailored for Nigerian Android users",
+    ],
+    badge: "Marketplace \u00B7 AI-Assisted \u00B7 Frontend",
+    highlightLabel: "New Project",
+    layout: "featured",
+  },
+  {
     title: "CVPadi",
     subtitle: "AI CV Builder SaaS",
     description:
@@ -84,24 +112,45 @@ export const featuredProjects: FeaturedProject[] = [
     liveLabel: "Live App",
   },
   {
-    title: "Freelance Calculator",
+    title: "VITA",
+    subtitle: "Emergency First Aid PWA",
     description:
-      "A tool that helps freelancers calculate their rates and project costs. Built to solve a real business problem for independent workers.",
+      "An offline-first first aid Progressive Web App designed for emergency use when internet access is unreliable. It delivers guided responses, triage, and incident logging from cache.",
+    live: "https://vita-sage.vercel.app",
+    github: "https://github.com/Eldren-cmd/VITA",
+    tech: [
+      "Next.js 14",
+      "TypeScript",
+      "PWA",
+      "Tailwind CSS",
+      "IndexedDB",
+      "Service Worker",
+    ],
+    keyFeatures: [
+      "Guided first-aid instructions for high-stress emergencies",
+      "Severity scoring flow for quick triage decisions",
+      "Offline-first architecture using service workers",
+      "Cached emergency content with zero live network dependency",
+      "Incident logging for medical handoff context",
+    ],
+    badge: "Health Tech \u00B7 Offline-First \u00B7 PWA",
+    highlightLabel: "New Project",
+  },
+];
+
+export const otherProjects: Project[] = [
+  {
+    title: "Freelance Calculator",
     live: "https://freelance-calculator-eight.vercel.app/",
     github: "https://github.com/Eldren-cmd/freelance-calculator",
     tech: ["JavaScript", "HTML", "CSS"],
   },
   {
     title: "School Website",
-    description:
-      "A complete multi-page school website. Demonstrates my ability to deliver full client-style websites for real organisations.",
     live: "https://school-website-black-ten.vercel.app/",
     github: "https://github.com/Eldren-cmd/school-website",
     tech: ["HTML", "CSS", "JavaScript"],
   },
-];
-
-export const otherProjects: Project[] = [
   {
     title: "E-Commerce Landing Page",
     live: "https://e-commerce-landing-page-wine.vercel.app/",
